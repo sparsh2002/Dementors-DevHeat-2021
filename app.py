@@ -4,7 +4,7 @@ from datetime import datetime
 
 from predictpage import show_predict_page
 from explorepage import show_explore_page
-
+from news import newspage
 
 # Cofiguration keys
 firebaseConfig = {
@@ -56,7 +56,7 @@ if choice =='Login':
     if login:
         user = auth.sign_in_with_email_and_password(email, password)
         st.write('<style>div.row-widget.stRadio>div{flex-direction:row;}</style>',unsafe_allow_html  = True)
-        bio = st.radio('Jump to',['Home','Workplace Feeds' , 'Settings' , 'Explore' , 'Predict'])
+        bio = st.radio('Jump to',['Home','Workplace Feeds' , 'Settings' , 'Explore' , 'Predict' ,'News'])
 
         # Settings Page
         if bio == 'Settings':
@@ -177,6 +177,8 @@ if choice =='Login':
         elif bio=='Explore':
             show_explore_page()
             
+        elif bio=='News':
+            newspage()
         else:
             show_predict_page()
 
