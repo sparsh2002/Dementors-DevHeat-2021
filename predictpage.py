@@ -33,7 +33,7 @@ def show_predict_page():
     symbol_json = symbol_response.json()
     symbol_list = [''] + [x['name'] for x in symbol_json]
     symbol_tuple = tuple(symbol_list)
-    COMPANY_NAME = st.selectbox('Select HomeTeamName name:',(symbol_tuple))
+    COMPANY_NAME = st.selectbox('Select Stock name:',(symbol_tuple))
 
     company_json = symbol_response.json()
     for x in company_json:

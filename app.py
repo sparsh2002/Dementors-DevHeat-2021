@@ -124,6 +124,7 @@ if choice =='Login':
                 all_posts = db.child(user['localId']).child('Posts').get()
                 if all_posts.val() is not None:
                     for Posts in reversed(all_posts.each()):
+                        print(Posts)
                         st.code(Posts.val() , language='')
         
 
@@ -174,7 +175,7 @@ if choice =='Login':
                     for Posts in reversed(all_posts.each()):
                         st.code(Posts.val(), language='')
 
-        elif bio=='Explore':
+        elif bio=='Predict':
             show_explore_page()
             
         elif bio=='News':
