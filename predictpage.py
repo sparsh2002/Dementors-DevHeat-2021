@@ -4,9 +4,23 @@ import matplotlib.pyplot as plt
 import pandas_datareader as data
 from keras.models import load_model
 import streamlit as st
-
+import requests
 from datetime import date
 from datetime import timedelta
+
+VIRTUAL_TWILIO_NUMBER = "+17633738499"
+VERIFIED_NUMBER = "+917398816950"
+
+STOCK_NAME = ''
+
+STOCK_ENDPOINT = "https://www.alphavantage.co/query"
+NEWS_ENDPOINT = "https://newsapi.org/v2/everything"
+SYMBOL_ENDPOINT = "https://api.iextrading.com/1.0/ref-data/symbols#"
+
+STOCK_API_KEY = "E4FRAX6OLKKJ2WJV"
+NEWS_API_KEY = "18887424b625474d9d4ff26f0f133e1a"
+TWILIO_SID = "ACb28949638a23ee329a3f81c746fd427f"
+TWILIO_AUTH_TOKEN = "743fd998dbe5404d89ad74b9e12cb242"
 
 def show_predict_page():
     start = '2010-01-01'
@@ -15,7 +29,20 @@ def show_predict_page():
 
     st.title('Stock Trend Prediction')
 
-    user_input = st.text_input('Enter Stock Ticket' , 'AAPL')
+    symbol_response = requests.get(SYMBOL_ENDPOINT)
+    symbol_json = symbol_response.json()
+    symbol_list = [''] + [x['name'] for x in symbol_json]
+    symbol_tuple = tuple(symbol_list)
+    COMPANY_NAME = st.selectbox('Select HomeTeamName name:',(symbol_tuple))
+
+    company_json = symbol_response.json()
+    for x in company_json:
+        if x['name'] == COMPANY_NAME:
+            STOCK_NAME = x['symbol']
+            break
+
+    # user_input = st.text_input('Enter Stock Ticket' , 'AAPL')
+    user_input = STOCK_NAME
     df = data.DataReader(user_input,'yahoo',start, end)
 
     #Describing Data
