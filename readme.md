@@ -32,3 +32,5 @@ News Page - Here user can select any desired stock name and get the latest news 
  - Clone the repo to your local machine
  - Install all the required libraries using `pip install <library name>`
  - Run command `Streamlit run app.py`
+
+## VIDEO LINK - [link](https://youtu.be/iIg_74LQ8s8)
